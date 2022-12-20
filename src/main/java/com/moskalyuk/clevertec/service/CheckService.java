@@ -26,6 +26,24 @@ public class CheckService {
 
     @Transactional
     public Map<String, BigDecimal> getCheck(List<Integer> ids, String cardNumber){
+        return Check.newBuilder()
+                .setProducts(createMap(ids))
+                .setDiscountCard(cardRepository.findByName(cardNumber))
+                .build()
+                .getCheck();
+    }
+
+    @Transactional
+    public byte[] getFile(List<Integer> ids, String cardNumber){
+        return Check.newBuilder()
+                .setProducts(createMap(ids))
+                .setDiscountCard(cardRepository.findByName(cardNumber))
+                .build()
+                .toString()
+                .getBytes();
+    }
+
+    private Map<Product,Integer> createMap(List<Integer> ids){
         Map<Product,Integer> products=new HashMap<>();
         for (Integer id : ids) {
             Optional<Product> product = productRepository.findById(id);
@@ -33,11 +51,7 @@ public class CheckService {
                 products.put(product.get(),(products.get(product.get())+1));
             } else product.ifPresent(value -> products.put(value, 1));
         }
-        return Check.newBuilder()
-                .setProducts(products)
-                .setDiscountCard(cardRepository.findByName(cardNumber).get())
-                .build()
-                .getCheck();
+        return products;
     }
 
 

@@ -3,14 +3,16 @@ package com.moskalyuk.clevertec.dto;
 import com.moskalyuk.clevertec.database.entity.DiscountCard;
 import com.moskalyuk.clevertec.database.entity.Product;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Check {
     private Check(){}
     private Map<Product, Integer> products;
-    private DiscountCard discountCard;
+    private Optional<DiscountCard> discountCard;
     private BigDecimal sum = BigDecimal.ZERO;
 
     public Map<String,BigDecimal> getCheck(){
@@ -29,12 +31,23 @@ public class Check {
                     entry.getKey().getName(),
                     price);
         }
-        if(discountCard!=null){
-            sum.multiply(BigDecimal.valueOf((100 - discountCard.getBit())*0.01));
-        }
+        discountCard.ifPresent(card -> sum.multiply(BigDecimal.valueOf((100 - card.getBit()) * 0.01)));
         check.put("sum:",sum);
         return check;
     }
+
+    @Override
+    public String toString() {
+        String products="";
+        for (Map.Entry<String, BigDecimal> entry: getCheck().entrySet()){
+            products+=entry.getKey()+" : "+entry.getValue().toString()+"$\n";
+        }
+        return "CHECK\n\n" +
+                products +
+                "discount card : " + discountCard.map(DiscountCard::getBit).orElse(0) + "%" + "\n" +
+                "sum : " + sum+"$";
+    }
+
     public static Builder newBuilder() {
         return new Check().new Builder();
     }
@@ -47,7 +60,7 @@ public class Check {
             Check.this.products = products;
             return this;
         }
-        public Builder setDiscountCard(DiscountCard card){
+        public Builder setDiscountCard(Optional<DiscountCard> card){
             Check.this.discountCard = card;
             return this;
         }
