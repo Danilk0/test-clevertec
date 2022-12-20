@@ -8,17 +8,9 @@ import jakarta.persistence.MappedSuperclass;
 
 import java.io.Serializable;
 
-@MappedSuperclass
-public class BaseEntity<T extends Serializable> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    T id;
+public interface BaseEntity<T extends Serializable> {
 
-    public T getId() {
-        return id;
-    }
+    T getId() ;
 
-    public void setId(T id) {
-        this.id = id;
-    }
+    void setId(T id) ;
 }

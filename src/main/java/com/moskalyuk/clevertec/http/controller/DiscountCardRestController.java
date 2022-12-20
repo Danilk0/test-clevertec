@@ -3,6 +3,9 @@ package com.moskalyuk.clevertec.http.controller;
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardCreateEditDto;
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardReadDto;
 import com.moskalyuk.clevertec.service.DiscountCardService;
+import com.moskalyuk.clevertec.validation.group.CreateAction;
+import com.moskalyuk.clevertec.validation.group.UpdateAction;
+import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,13 +44,13 @@ public class DiscountCardRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public DiscountCardReadDto create(@Validated @RequestBody DiscountCardCreateEditDto createDto) {
+    public DiscountCardReadDto create(@Validated() @RequestBody DiscountCardCreateEditDto createDto) {
         return discountCardService.create(createDto);
     }
 
     @PutMapping("/{id}")
     public DiscountCardReadDto update(@PathVariable("id") Integer id,
-                               @RequestBody @Validated DiscountCardCreateEditDto editDto) {
+                               @RequestBody @Validated() DiscountCardCreateEditDto editDto) {
         return discountCardService.update(id, editDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

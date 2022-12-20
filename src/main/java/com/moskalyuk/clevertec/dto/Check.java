@@ -32,6 +32,7 @@ public class Check {
                     price);
         }
         discountCard.ifPresent(card -> sum.multiply(BigDecimal.valueOf((100 - card.getBit()) * 0.01)));
+        check.put("discount card:", BigDecimal.valueOf(discountCard.map(DiscountCard::getBit).orElse(0)));
         check.put("sum:",sum);
         return check;
     }

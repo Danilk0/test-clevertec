@@ -5,6 +5,9 @@ import com.moskalyuk.clevertec.dto.discountCard.DiscountCardReadDto;
 import com.moskalyuk.clevertec.dto.product.ProductCreateEditDto;
 import com.moskalyuk.clevertec.dto.product.ProductReadDto;
 import com.moskalyuk.clevertec.service.ProductService;
+import com.moskalyuk.clevertec.validation.group.CreateAction;
+import com.moskalyuk.clevertec.validation.group.UpdateAction;
+import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,13 +46,13 @@ public class ProductRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductReadDto create(@Validated @RequestBody ProductCreateEditDto createDto) {
+    public ProductReadDto create(@Validated() @RequestBody ProductCreateEditDto createDto) {
         return productService.create(createDto);
     }
 
     @PutMapping("/{id}")
     public ProductReadDto update(@PathVariable("id") Integer id,
-                                      @RequestBody @Validated ProductCreateEditDto editDto) {
+                                      @RequestBody @Validated()ProductCreateEditDto editDto) {
         return productService.update(id, editDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

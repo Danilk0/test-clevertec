@@ -2,17 +2,18 @@ package com.moskalyuk.clevertec.database.entity;
 
 import com.moskalyuk.clevertec.dto.Check;
 import com.moskalyuk.clevertec.dto.product.ProductCreateEditDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 @Table(name = "product")
 @Entity
-public class Product extends BaseEntity<Integer>{
+public class Product implements BaseEntity<Integer>{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     @Column
     private String name;
 
@@ -51,6 +52,16 @@ public class Product extends BaseEntity<Integer>{
 
     public static Product.Builder newBuilder() {
         return new Product().new Builder();
+    }
+
+    @Override
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id=id;
     }
 
     public class Builder {

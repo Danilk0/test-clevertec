@@ -26,7 +26,7 @@ public class CheckRestController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, BigDecimal> getCheck(@RequestParam List<Integer> itemId, @RequestParam(name = "card") String card ){
+    public Map<String, BigDecimal> getCheck(@RequestParam List<Integer> itemId, @RequestParam(name = "card",required = false) String card ){
         return checkService.getCheck(itemId,card);
     }
 

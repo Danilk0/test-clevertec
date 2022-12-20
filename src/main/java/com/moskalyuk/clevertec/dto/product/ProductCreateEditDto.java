@@ -2,12 +2,19 @@ package com.moskalyuk.clevertec.dto.product;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+import com.moskalyuk.clevertec.validation.UniqueProductName;
+
 
 import java.math.BigDecimal;
 
 public class ProductCreateEditDto {
+    @NotNull(message = "Product name not valid")
+    @Size(min=2,max = 64,message = "Product name don't have invalid size")
+    @UniqueProductName()
     private String name;
 
+    @PositiveOrZero(message = "Product don't have invalid price")
     private BigDecimal price;
     private Boolean promotionalItem;
 

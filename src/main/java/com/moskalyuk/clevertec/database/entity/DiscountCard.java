@@ -2,14 +2,15 @@ package com.moskalyuk.clevertec.database.entity;
 
 
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardCreateEditDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 @Table(name = "discount_card")
 @Entity
-public class DiscountCard extends BaseEntity<Integer> {
+public class DiscountCard implements BaseEntity<Integer> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     @Column
     private String name;
 
@@ -37,6 +38,16 @@ public class DiscountCard extends BaseEntity<Integer> {
 
     public static DiscountCard.Builder newBuilder() {
         return new DiscountCard().new Builder();
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id=id;
     }
 
     public class Builder {

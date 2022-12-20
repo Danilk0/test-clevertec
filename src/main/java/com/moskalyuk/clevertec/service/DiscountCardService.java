@@ -57,8 +57,12 @@ public class DiscountCardService {
 
     @Transactional
     public boolean delete(Integer id) {
-        var maybeEvent = discountCardRepository.findById(id);
-        maybeEvent.ifPresent(discountCardRepository::delete);
-        return maybeEvent.isPresent();
+        return discountCardRepository.findById(id)
+                .map(entity -> {
+                    discountCardRepository.delete(entity);
+                    discountCardRepository.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 }

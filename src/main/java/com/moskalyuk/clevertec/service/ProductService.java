@@ -65,8 +65,12 @@ public class ProductService {
 
     @Transactional
     public boolean delete(Integer id) {
-        var maybeEvent = productRepository.findById(id);
-        maybeEvent.ifPresent(productRepository::delete);
-        return maybeEvent.isPresent();
+        return productRepository.findById(id)
+                .map(entity -> {
+                    productRepository.delete(entity);
+                    productRepository.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 }
