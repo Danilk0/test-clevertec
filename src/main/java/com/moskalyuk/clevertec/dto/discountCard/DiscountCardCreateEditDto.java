@@ -4,8 +4,7 @@ import com.moskalyuk.clevertec.database.entity.DiscountCard;
 import com.moskalyuk.clevertec.database.entity.Product;
 import com.moskalyuk.clevertec.dto.Check;
 import com.moskalyuk.clevertec.validation.UniqueCardName;
-import com.moskalyuk.clevertec.validation.group.CreateAction;
-import com.moskalyuk.clevertec.validation.group.UpdateAction;
+
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

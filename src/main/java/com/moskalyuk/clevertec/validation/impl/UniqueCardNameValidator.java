@@ -19,6 +19,6 @@ public class UniqueCardNameValidator implements ConstraintValidator<UniqueCardNa
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return discountCardRepository.findByName(value).isPresent();
+        return discountCardRepository.findByName(value).isEmpty();
     }
 }

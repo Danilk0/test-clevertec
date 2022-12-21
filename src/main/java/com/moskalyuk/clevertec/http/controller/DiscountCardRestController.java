@@ -3,8 +3,7 @@ package com.moskalyuk.clevertec.http.controller;
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardCreateEditDto;
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardReadDto;
 import com.moskalyuk.clevertec.service.DiscountCardService;
-import com.moskalyuk.clevertec.validation.group.CreateAction;
-import com.moskalyuk.clevertec.validation.group.UpdateAction;
+
 import jakarta.validation.groups.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

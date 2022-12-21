@@ -14,5 +14,7 @@ public interface ProductRepository extends CrudRepository<Product,Integer>,JpaRe
 
     List<Product> findAll();
 
+
     Optional<Product> findById(Integer id);
+    Optional<Product> findByName(String name);
 }
