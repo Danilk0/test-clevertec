@@ -44,9 +44,7 @@ public class Check {
             products+=entry.getKey()+" : "+entry.getValue().toString()+"$\n";
         }
         return "CHECK\n\n" +
-                products +
-                "discount card : " + discountCard.map(DiscountCard::getBit).orElse(0) + "%" + "\n" +
-                "sum : " + sum+"$";
+                products;
     }
 
     public static Builder newBuilder() {

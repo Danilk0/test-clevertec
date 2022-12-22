@@ -12,6 +12,18 @@ public class DiscountCardReadDto {
     @JsonSerialize
     private Integer bit;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getBit() {
+        return bit;
+    }
+
     public DiscountCardReadDto() {
     }
 

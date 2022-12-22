@@ -20,7 +20,11 @@ dependencies {
     implementation 'org.liquibase:liquibase-core'
 
     runtimeOnly 'org.postgresql:postgresql'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.testcontainers:postgresql:1.17.4'
 }
 
 tasks.named('test') {

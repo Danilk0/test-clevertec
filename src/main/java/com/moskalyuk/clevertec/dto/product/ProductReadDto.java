@@ -14,6 +14,22 @@ public class ProductReadDto {
     @JsonSerialize
     private Boolean promotionalItem;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Boolean getPromotionalItem() {
+        return promotionalItem;
+    }
+
     private ProductReadDto() {
     }
 
