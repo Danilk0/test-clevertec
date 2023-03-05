@@ -3,6 +3,7 @@ package com.moskalyuk.clevertec.database.entity;
 
 import com.moskalyuk.clevertec.dto.discountCard.DiscountCardCreateEditDto;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 
 @Table(name = "discount_card")

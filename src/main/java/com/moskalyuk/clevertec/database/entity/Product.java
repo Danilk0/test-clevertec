@@ -3,6 +3,7 @@ package com.moskalyuk.clevertec.database.entity;
 import com.moskalyuk.clevertec.dto.Check;
 import com.moskalyuk.clevertec.dto.product.ProductCreateEditDto;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 import java.math.BigDecimal;
 import java.util.Map;
